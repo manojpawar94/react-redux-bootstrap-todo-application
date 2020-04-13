@@ -1,38 +1,73 @@
-.App {
-  text-align: center;
+*, body, html {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14PX;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  padding: 16px;
+  margin: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.input {
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 32px;
+  border: 1px solid;
+  margin: 8px;
+  width: 320px;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.button {
+  padding: 12px 12px;
+  margin: 8px;
+  font-size: 16px;
+  border-radius: 32px;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+}
+
+.button:hover {
+  padding: 12px 12px;
+  margin: 8px 4px 8px 12px;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+}
+
+.button-icon {
+  padding: 8px;
+}
+
+textarea, select, input, button {
+  outline: none;
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  width: 40%;
+  border-radius: 8px;
+  border: 1px solid rgb(209, 209, 209);
+  transition: 0.3s;
+  margin: 8px;
+  padding: 16px;
+}
+
+/* On mouse-over, add a deeper shadow */
+
+.card:hover {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.list-container {
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.text {
+  width: 64%;
+  font-size: 16px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.action {
+  width: 36%;
 }

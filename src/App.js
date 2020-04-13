@@ -1,25 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import AddTodoItem from './containers/AddTodoItem';
+import TodoItemList from './containers/TodoItemList';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 function App() {
+  let title = "React + Redux Todo Application -  Manoj";
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Row>
+        <h3 style={{ fontWeight: 'bolder' }}>{title}</h3>
+      </Row>
+      <hr></hr>
+      <AddTodoItem />
+      <TodoItemList />
+    </Container>
   );
 }
 

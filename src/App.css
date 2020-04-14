@@ -14,7 +14,7 @@ body {
   border-radius: 32px;
   border: 1px solid;
   margin: 8px;
-  width: 320px;
+  width: 75%;
   border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
 }
 
@@ -36,18 +36,34 @@ body {
   padding: 8px;
 }
 
-textarea, select, input, button {
+textarea, select, input, button, .no-glow {
   outline: none;
+}
+
+.custom-card {
+  /* Add shadows to create the "card" effect */
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgb(209, 209, 209);
+  transition: 0.3s;
+  margin-bottom: 8px;
+  padding: 16px;
+}
+
+/* On mouse-over, add a deeper shadow */
+
+.custom-card:hover {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .card {
   /* Add shadows to create the "card" effect */
-  width: 40%;
+  width: 100%;
   border-radius: 8px;
   border: 1px solid rgb(209, 209, 209);
   transition: 0.3s;
-  margin: 8px;
-  padding: 16px;
+  margin-bottom: 8px;
+  padding: 8px 16px;
 }
 
 /* On mouse-over, add a deeper shadow */

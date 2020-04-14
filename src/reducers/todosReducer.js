@@ -1,9 +1,9 @@
-import { ADD_ITEM, EDIT_ITEM, REMOVE_ITEM, TODO_COMPLETED } from "../constants/TodoConstant";
+import { TodoActions } from "../constants/TodoConstant";
 
 const todosReducer = (state = [], action) => {
     switch (action.type) {
-        case ADD_ITEM:
-            // console.log(`test -> ${action.type} : ${action.payload}`);
+        case TodoActions.ADD_ITEM:
+            //console.log(`test -> ${action.type} : ${action.payload}`);
             return [
                 ...state,
                 Object.assign({},
@@ -15,7 +15,7 @@ const todosReducer = (state = [], action) => {
                     })
             ];
 
-        case EDIT_ITEM:
+        case TodoActions.EDIT_ITEM:
             // console.log(`${action.type} : ${action.payload.id} : ${action.payload.text}`);
             return state.map(todo => {
                 //console.log(`map: ${todo.id} = ${action.payload.id}`)
@@ -33,7 +33,7 @@ const todosReducer = (state = [], action) => {
             });
 
 
-        case REMOVE_ITEM:
+        case TodoActions.REMOVE_ITEM:
             //console.log(`${action.type} : ${action.payload}`);
             return state.filter(todo => todo.id !== action.payload)
                 .map(
@@ -46,7 +46,7 @@ const todosReducer = (state = [], action) => {
                     )
                 );
 
-        case TODO_COMPLETED:
+        case TodoActions.TODO_COMPLETED:
             //console.log(`${action.type} : ${action.payload}`);
             return state.map(todo => {
                 if (todo.id === action.payload) {
@@ -59,6 +59,13 @@ const todosReducer = (state = [], action) => {
                     return todo
                 }
             })
+
+        case TodoActions.TOGGLE_TODO:
+            return state.map(todo =>
+                (todo.id === action.id)
+                    ? { ...todo, completed: !todo.completed }
+                    : todo
+            )
 
         default:
             return state;

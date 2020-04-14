@@ -1,10 +1,11 @@
-import { ADD_ITEM, EDIT_ITEM, REMOVE_ITEM, TODO_COMPLETED } from '../constants/TodoConstant';
+import { TodoActions, VisibilityFilterActions } from '../constants/TodoConstant';
 
 //action to add new item in todo list
 export const addTodoItem = (text) => {
     let trimmedText = text.trim();
+    //console.log(`${trimmedText} in action`)
     return {
-        type: ADD_ITEM,
+        type: TodoActions.ADD_ITEM,
         payload: trimmedText
     }
 }
@@ -12,7 +13,7 @@ export const addTodoItem = (text) => {
 //action to edit the item in todo list
 export const editTodoItem = (id, text) => {
     return {
-        type: EDIT_ITEM,
+        type: TodoActions.EDIT_ITEM,
         payload: {
             id: id,
             text: text
@@ -23,7 +24,7 @@ export const editTodoItem = (id, text) => {
 //action to remove the item from todo list
 export const removeTodoItem = (id) => (
     {
-        type: REMOVE_ITEM,
+        type: TodoActions.REMOVE_ITEM,
         payload: id
     }
 )
@@ -31,7 +32,18 @@ export const removeTodoItem = (id) => (
 //action to remove the item from todo list
 export const markTodoItemCompleted = (id) => (
     {
-        type: TODO_COMPLETED,
+        type: TodoActions.TODO_COMPLETED,
         payload: id
     }
 )
+
+export const toggleTodo = id => ({
+    type: TodoActions.TOGGLE_TODO,
+    id
+})
+
+export const setVisibilityFilter = filter => ({
+    type: VisibilityFilterActions.SET_VISIBILITY_FILTER,
+    filter
+})
+

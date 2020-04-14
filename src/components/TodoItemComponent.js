@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+
 export default class TodoItemComponent extends Component {
 
     constructor() {
@@ -32,7 +40,9 @@ export default class TodoItemComponent extends Component {
             //console.log('Empty value');
             return
         } else if (this.state.updateTodoText === 'Default') {
-            //console.log('it has default value');
+            this.setState({
+                isEditable: false
+            })
             return
         } else {
             //console.log(`Submitting todoText ${this.state.updateTodoText}`);
@@ -48,45 +58,103 @@ export default class TodoItemComponent extends Component {
         let { id, text, completed } = this.props;
 
         return (
-            <div className="card">
+            <Card>
                 {!isEditable ? (
-                    <div className="list-container">
-                        <span className="text" style={{
-                            textDecoration: completed ? 'line-through' : 'none'
-                        }}>{id} - {text}</span>
-                        <div className="action">
-                            <button type="button" className="button-icon" onClick={this.toggleIsEditable}>
-                                <i className="material-icons">create</i>
-                            </button>
-                            <button type="button" className="button-icon" onClick={event => this.props.remove(id)}>
-                                <i className="material-icons">delete</i>
-                            </button>
-                            <button type="button" className="button-icon" onClick={event => this.props.done(id)}>
-                                {
-                                    completed ? (<i className="material-icons" >cancel</i>) : (<i className="material-icons" >done</i>)
+                    <InputGroup size="lg">
+                        <FormControl
+                            aria-describedby="basic-addon2"
+                            style={{
+                                textDecoration: completed ? 'line-through' : 'none',
+                                border: 'none',
+                                background: 'none',
+                                height: '46px'
+                            }}
+                            value={text}
+                            disabled
+                        />
+                        <InputGroup.Append>
+                            <OverlayTrigger placement="bottom"
+                                overlay={
+                                    <Tooltip>
+                                        <strong>Edit</strong>.
+                                                </Tooltip>
                                 }
-                            </button>
-                        </div>
-                    </div>
+                            >
+                                <Button variant="outline-secondary" onClick={this.toggleIsEditable}>
+                                    <i className="material-icons">create</i>
+                                </Button>
+                            </OverlayTrigger>
+                            <OverlayTrigger placement="bottom"
+                                overlay={
+                                    <Tooltip>
+                                        <strong>Delete</strong>.
+                                    </Tooltip>
+                                }
+                            >
+                                <Button variant="outline-secondary" onClick={event => this.props.remove(id)}>
+                                    <i className="material-icons">delete</i>
+                                </Button>
+                            </OverlayTrigger>
+                            <OverlayTrigger placement="bottom"
+                                overlay={
+                                    <Tooltip>
+                                        <strong>{completed ? 'Mark Active' : 'Mark Completed'}</strong>.
+                                    </Tooltip>
+                                }
+                            >
+                                <Button variant="outline-secondary" onClick={event => this.props.done(id)}>
+                                    {
+                                        completed ? (<i className="material-icons" >cancel</i>) : (<i className="material-icons" >done</i>)
+                                    }
+                                </Button>
+                            </OverlayTrigger>
+                        </InputGroup.Append>
+                    </InputGroup>
                 ) : (
-                        <form onSubmit={this.handleSubmit}>
-                            <input
-                                className="input"
-                                type="text"
-                                value={this.state.updateTodoText === 'Default' ? text : this.state.updateTodoText}
-                                onChange={this.setTodoText}
-                            />
-                            <button type="submit" className="button-icon">
-                                <i className="material-icons">done</i>
-                            </button>
-                            <button type="button" className="button-icon" onClick={this.toggleIsEditable}>
-                                <i className="material-icons">cancel</i>
-                            </button>
-                        </form>
+                        <Form onSubmit={this.handleSubmit}>
+                            <Form.Row>
+                                <InputGroup size="lg">
+                                    <FormControl
+                                        placeholder="Recipient's username"
+                                        aria-label="Recipient's username"
+                                        aria-describedby="basic-addon2"
+                                        type="text"
+                                        value={this.state.updateTodoText === 'Default' ? text : this.state.updateTodoText}
+                                        onChange={this.setTodoText}
+                                        style={{ height: '46px' }}
+                                    />
+                                    <InputGroup.Append>
+                                        <OverlayTrigger placement="bottom"
+                                            overlay={
+                                                <Tooltip>
+                                                    <strong>Update</strong>.
+                                                </Tooltip>
+                                            }
+                                        >
+                                            <Button type="submit" variant="outline-secondary">
+                                                <i className="material-icons">done</i>
+                                            </Button>
+                                        </OverlayTrigger>
+                                        <OverlayTrigger placement="bottom"
+                                            overlay={
+                                                <Tooltip>
+                                                    <strong>Cancel</strong>.
+                                                </Tooltip>
+                                            }
+                                        >
+                                            <Button variant="outline-secondary" onClick={this.toggleIsEditable} >
+                                                <i className="material-icons">cancel</i>
+                                            </Button>
+                                        </OverlayTrigger>
 
-                    )}
+                                    </InputGroup.Append>
+                                </InputGroup>
+                            </Form.Row>
+                        </Form>
+                    )
+                }
 
-            </div>
+            </Card>
         )
     }
 }
@@ -96,7 +164,3 @@ TodoItemComponent.propTypes = {
     text: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired
 }
-
-
-
-
